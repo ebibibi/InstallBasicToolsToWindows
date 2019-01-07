@@ -28,3 +28,22 @@ Do {
         Remove-Item "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose 
     } 
 } Until (!$ProcessesFound)
+
+#-------------------
+#install Git
+#-------------------
+$LocalTempDir = $env:TEMP
+$GitInstaller = "GitInstaller.exe"
+(new-object    System.Net.WebClient).DownloadFile('https://github.com/git-for-windows/git/releases/download/v2.20.1.windows.1/Git-2.20.1-64-bit.exe', "$LocalTempDir\$GitInstaller")
+& "$LocalTempDir\$GitInstaller" /silent
+$Process2Monitor =  "GitInstaller"
+Do { 
+    $ProcessesFound = Get-Process | Where-Object{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name
+    If ($ProcessesFound) {
+        "Still running: $($ProcessesFound -join ', ')" | Write-Host
+        Start-Sleep -Seconds 2 
+    } else {
+        Remove-Item "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose 
+    } 
+} Until (!$ProcessesFound)
+
