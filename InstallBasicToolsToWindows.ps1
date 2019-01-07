@@ -47,3 +47,10 @@ Do {
     } 
 } Until (!$ProcessesFound)
 
+#-------------------
+#install TortoiseGit
+#-------------------
+$LocalTempDir = $env:TEMP
+$TortoiseGitInstaller = "TortoiseGit.msi"
+(new-object    System.Net.WebClient).DownloadFile('https://download.tortoisegit.org/tgit/2.7.0.0/TortoiseGit-2.7.0.0-64bit.msi', "$LocalTempDir\$TortoiseGitInstaller")
+& "$LocalTempDir\$TortoiseGitInstaller" /passive
