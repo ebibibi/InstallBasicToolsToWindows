@@ -56,3 +56,14 @@ $LocalTempDir = $env:TEMP
 $TortoiseGitInstaller = "TortoiseGit.msi"
 (new-object    System.Net.WebClient).DownloadFile('https://download.tortoisegit.org/tgit/2.7.0.0/TortoiseGit-2.7.0.0-64bit.msi', "$LocalTempDir\$TortoiseGitInstaller")
 & "$LocalTempDir\$TortoiseGitInstaller" /passive
+WaitProcess "msiexec"
+
+#--------------
+#install VSCode
+#--------------
+$LocalTempDir = $env:TEMP
+$VSCodeInstaller = "VSCodeUserSetup-x64.exe"
+(new-object    System.Net.WebClient).DownloadFile('https://az764295.vo.msecnd.net/stable/dea8705087adb1b5e5ae1d9123278e178656186a/VSCodeUserSetup-x64-1.30.1.exe', "$LocalTempDir\$VSCodeInstaller")
+& "$LocalTempDir\$VSCodeInstaller" /silent
+WaitProcess "VSCodeUserSetup-x64"
+
